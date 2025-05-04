@@ -69,7 +69,7 @@ IF EXIST "%CUSTOM_EXT_DIR%" (
 mkdir "%CUSTOM_EXT_DIR%"
 
 REM === Copy the extension ===
-xcopy "%FOUND_EXT%" "%CUSTOM_EXT_DIR%\%EXT_ID%" /E /I /Y >nul
+REM xcopy "%FOUND_EXT%" "%CUSTOM_EXT_DIR%\%EXT_ID%" /E /I /Y >nul
 
 REM === Create the .code-workspace file ===
 (
