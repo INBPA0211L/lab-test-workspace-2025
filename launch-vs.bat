@@ -127,7 +127,8 @@ REM === Create the c_cpp_properties.json file ===
 
 REM === Launch VS Code ===
 pushd "%WORKSPACE_DIR%"
-echo code --extensions-dir "%CUSTOM_EXT_DIR%"  --user-data-dir "%WORKSPACE_DIR%\user-data" --install-extension ms-vscode.cpptools --force "%WORKSPACE_FILE%" 
-code --extensions-dir "%CUSTOM_EXT_DIR%" --user-data-dir "%WORKSPACE_DIR%\user-data" --install-extension ms-vscode.cpptools --force
-code --extensions-dir "%CUSTOM_EXT_DIR%" --user-data-dir "%WORKSPACE_DIR%\user-data" "%WORKSPACE_FILE%" 
+echo code --extensions-dir extensions --user-data-dir user-data --install-extension ms-vscode.cpptools --force
+code --extensions-dir extensions --user-data-dir user-data --install-extension ms-vscode.cpptools --force
+echo code --extensions-dir extensions --user-data-dir user-data "%WORKSPACE_NAME.code-workspace%" 
+code --extensions-dir extensions --user-data-dir user-data "%WORKSPACE_NAME.code-workspace%" 
 popd
