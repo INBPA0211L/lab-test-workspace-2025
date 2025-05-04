@@ -10,6 +10,8 @@ This repository provides the students a quick solution for creating their VS Cod
 
 1. Have an installed `git` client.
 
+1. Have an installed VS Code, and it's [C/C++ plugin](https://marketplace.visualstudio.com/items?itemName=ms-vscode.cpptools).
+
 ## Usage
 
 1. Chose a location and a name for your workspace such as `D:/university` and `LAB-TEST`.
