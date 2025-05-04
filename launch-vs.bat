@@ -89,7 +89,11 @@ REM === Create the .settings file ===
 (
     echo   {
     echo     "C_Cpp.default.compilerPath": "%GCC_PATH%/bin/gcc.exe",
-    echo     "C_Cpp.intelliSenseEngine": "default"
+    echo     "C_Cpp.intelliSenseEngine": "default",
+    echo     "extensions.allowed": {
+    echo       "ms-vscode.cpptools": true,
+    echo     },
+    echo     "extensions.gallery.enabled": false
     echo   }
 ) > "%VS_CODE_FOLDER%\settings.json"
 
@@ -123,5 +127,6 @@ REM === Create the c_cpp_properties.json file ===
 
 REM === Launch VS Code ===
 pushd "%WORKSPACE_DIR%"
+echo code --extensions-dir "%CUSTOM_EXT_DIR%" "%WORKSPACE_FILE%"
 code --extensions-dir "%CUSTOM_EXT_DIR%" "%WORKSPACE_FILE%"
 popd
