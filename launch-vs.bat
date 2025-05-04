@@ -1,5 +1,12 @@
 @echo off
 
+REM === check for GCC ===
+where gcc >nul 2>&1
+if NOT %errorlevel%==0 (
+    echo gcc NOT found in your PATH
+    exit /b 1
+)
+
 REM === configuration ===
 SET "EXT_ID=ms-vscode.cpptools"
 SET "ORIG_EXT_DIR=%USERPROFILE%\.vscode\extensions"
