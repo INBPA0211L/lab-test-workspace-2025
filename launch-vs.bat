@@ -60,19 +60,6 @@ REM === Create the .settings file ===
     echo  }
 ) > "%VS_CODE_FOLDER%\settings.json"
 
-
-REM === Create the .settings file ===
-(
-    echo  {
-    echo      "extensions.allowed": {
-    echo        "ms-vscode.cpptools": true,
-    echo      },
-    echo      "editor.fontSize": 14,
-    echo      "editor.mouseWheelZoom": true,
-    echo      "editor.formatOnType": true
-    echo  }
-) > "%WORKSPACE_DIR%\user-data\User\settings.json"
-
 REM === Create the c_cpp_properties.json file ===
 (
     echo   {
@@ -102,6 +89,19 @@ REM === Launch VS Code ===
 pushd "%WORKSPACE_DIR%"
 echo code --extensions-dir extensions --user-data-dir user-data --install-extension ms-vscode.cpptools --force
 call code --extensions-dir extensions --user-data-dir user-data --install-extension ms-vscode.cpptools --force
+
+REM === Create the .settings file ===
+(
+    echo  {
+    echo      "extensions.allowed": {
+    echo        "ms-vscode.cpptools": true,
+    echo      },
+    echo      "editor.fontSize": 14,
+    echo      "editor.mouseWheelZoom": true,
+    echo      "editor.formatOnType": true
+    echo  }
+) > "%WORKSPACE_DIR%\user-data\User\settings.json"
+
 echo code --extensions-dir extensions --user-data-dir user-data "%WORKSPACE_NAME%.code-workspace" 
 code --extensions-dir extensions --user-data-dir user-data "%WORKSPACE_NAME%.code-workspace" 
 popd
