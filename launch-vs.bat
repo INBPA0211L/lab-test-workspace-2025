@@ -1,12 +1,5 @@
 @echo off
 
-REM === check for GCC ===
-where gcc >nul 2>&1
-if NOT %errorlevel%==0 (
-    echo gcc NOT found in your PATH
-    exit /b 1
-)
-
 REM === configuration ===
 SET "EXT_ID=ms-vscode.cpptools"
 SET "ORIG_EXT_DIR=%USERPROFILE%\.vscode\extensions"
@@ -27,29 +20,6 @@ SET "VS_CODE_FOLDER=%WORKSPACE_DIR%\.vscode"
 echo Home directory: "%HOME_DIR%"
 echo Workspace: "%WORKSPACE_NAME%"
 
-for /f "usebackq delims=" %%A in (`where gcc`) do (
-    set "GCC_FULL_PATH=%%A"
-    goto afterWhere
-)
-
-:afterWhere
-rem Extract part before \bin
-for /f "delims=\ tokens=1,2" %%A in ("%gccPath%") do (
-    SET "GCC_PATH=%%A\%%B"
-)
-
-
-REM === Check if the extension exists ===
-SET "FOUND_EXT="
-FOR /D %%D IN ("%ORIG_EXT_DIR%\%EXT_ID%-*") DO (
-    SET "FOUND_EXT=%%D"
-)
-
-IF NOT DEFINED FOUND_EXT (
-    echo Extension "%EXT_ID%" not found in %ORIG_EXT_DIR%
-    exit /b 1
-)
-
 REM === Ensure workspace folder exists ===
 IF NOT EXIST "%WORKSPACE_DIR%" (
     echo Workspace folder "%WORKSPACE_DIR%" does not exist.
@@ -68,9 +38,6 @@ IF EXIST "%CUSTOM_EXT_DIR%" (
 )
 mkdir "%CUSTOM_EXT_DIR%"
 
-REM === Copy the extension ===
-REM xcopy "%FOUND_EXT%" "%CUSTOM_EXT_DIR%\%EXT_ID%" /E /I /Y >nul
-
 REM === Create the .code-workspace file ===
 (
     echo {
@@ -87,16 +54,24 @@ REM === Create the .code-workspace file ===
 
 REM === Create the .settings file ===
 (
-    echo   {
-    echo     "C_Cpp.default.compilerPath": "%GCC_PATH%/bin/gcc.exe",
-    echo     "C_Cpp.intelliSenseEngine": "default",
-    echo     "extensions.allowed": {
-    echo       "ms-vscode.cpptools": true,
-    echo     },
-    echo     "extensions.gallery.enabled": false
-    echo   }
+    echo  {
+    echo    "C_Cpp.default.compilerPath": "C:/MinGW/bin/gcc.exe",
+    echo    "C_Cpp.intelliSenseEngine": "default"
+    echo  }
 ) > "%VS_CODE_FOLDER%\settings.json"
 
+
+REM === Create the .settings file ===
+(
+    echo  {
+    echo      "extensions.allowed": {
+    echo        "ms-vscode.cpptools": true,
+    echo      },
+    echo      "editor.fontSize": 14,
+    echo      "editor.mouseWheelZoom": true,
+    echo      "editor.formatOnType": true
+    echo  }
+) > "%WORKSPACE_DIR%\user-data\User\settings.json"
 
 REM === Create the c_cpp_properties.json file ===
 (
@@ -105,17 +80,15 @@ REM === Create the c_cpp_properties.json file ===
     echo       {
     echo         "name": "Win32",
     echo         "includePath": [
-    echo           "${workspaceFolder}/**",
-    echo           "%GCC_PATH%/include"
+echo                "C:/MinGW/include"
     echo         ],
     echo         "defines": [],
-    echo         "compilerPath": "%GCC_PATH%/bin/gcc.exe",
+    echo         "compilerPath": "C:/MinGW/bin/gcc.exe",
     echo         "cStandard": "c99",
     echo         "intelliSenseMode": "gcc-x86",
     echo         "browse": {
     echo           "path": [
-    echo             "%GCC_PATH%/include",
-    echo             "${workspaceFolder}"
+    echo             "C:/MinGW/include"
     echo           ],
     echo           "limitSymbolsToIncludedHeaders": true
     echo         }
