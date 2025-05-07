@@ -6,19 +6,19 @@ This repository provides the students a quick solution for creating their VS Cod
 
 1. Windows is required for executing the script. Other operating systems are not supported.
 
-1. Have an installed *MinGW*, and add it's `/bin/gcc.exe` to the `PATH` variable. Thus, command `gcc` must work in the command-line prompt.
+1. Have an installed *MinGW* with the path `C:/MinGW/bin/gcc.exe`.
 
 1. Have an installed `git` client.
 
 ## Usage
 
-1. Chose a location and a name for your workspace such as `D:/university` and `LAB-TEST`.
+1. Chose a location and a name for your workspace such as `C:/university` and `LAB-TEST`.
 
 1. Open a Windows command-line prompt.
 
 1. Run the following commands:
 
    ```
-   git clone https://github.com/INBPA0211L/lab-test-workspace-2025 D:/university/LAB-TEST
-   D:/university/LAB-TEST/launch-vs
+   git clone https://github.com/INBPA0211L/lab-test-workspace-2025 C:/university/LAB-TEST
+   C:/university/LAB-TEST/launch-vs
    ```
